@@ -1,0 +1,20 @@
+{
+  "About": {
+    "description": "Auto imported from components/About.vue"
+  },
+  "LazyAbout": {
+    "description": "Auto imported from components/About.vue"
+  },
+  "AppBar": {
+    "description": "Auto imported from components/AppBar.vue"
+  },
+  "LazyAppBar": {
+    "description": "Auto imported from components/AppBar.vue"
+  },
+  "Hero": {
+    "description": "Auto imported from components/Hero.vue"
+  },
+  "LazyHero": {
+    "description": "Auto imported from components/Hero.vue"
+  }
+}
