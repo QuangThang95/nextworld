@@ -1,17 +1,14 @@
 <template>
   <div>
     <v-carousel
-      cycle
       :height="height"
       hide-delimiter-background
-      show-arrows-on-hover
     >
-      <v-carousel-item
+      <!-- <v-carousel-item
         v-for="(slide, i) in slides"
         :key="i"
       >
         <v-sheet
-          :color="colors[i]"
           height="100%"
         >
           <v-row
@@ -24,6 +21,35 @@
             </div>
           </v-row>
         </v-sheet>
+      </v-carousel-item> -->
+      <v-carousel-item
+        v-for="(item,i) in items"
+        :key="i"
+        :src="item.src"
+      >
+        <v-sheet
+          height="100%"
+          tile
+        >
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
+          >
+            <div class="display-3">
+              Slide {{ i + 1 }}
+            </div>
+          </v-row>
+        </v-sheet>
+        <!-- <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+          <div class="display-3">
+            Picture {{ i + 1}}
+          </div>
+        </v-row> -->
       </v-carousel-item>
     </v-carousel>
   </div>
@@ -47,6 +73,17 @@
           'Third',
           'Fourth',
           'Fifth',
+        ],
+        items: [
+          {
+            src: '/hero/3.jpg',
+          },
+          {
+            src: '/hero/2.jpg',
+          },
+          {
+            src: '/hero/1.jpg',
+          }
         ],
       }
     },

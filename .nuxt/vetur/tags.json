@@ -1,20 +1,44 @@
 {
-  "About": {
-    "description": "Auto imported from components/About.vue"
-  },
-  "LazyAbout": {
-    "description": "Auto imported from components/About.vue"
-  },
   "AppBar": {
     "description": "Auto imported from components/AppBar.vue"
   },
   "LazyAppBar": {
     "description": "Auto imported from components/AppBar.vue"
   },
-  "Hero": {
-    "description": "Auto imported from components/Hero.vue"
+  "Section1": {
+    "description": "Auto imported from components/section1.vue"
   },
-  "LazyHero": {
-    "description": "Auto imported from components/Hero.vue"
+  "LazySection1": {
+    "description": "Auto imported from components/section1.vue"
+  },
+  "Section2": {
+    "description": "Auto imported from components/section2.vue"
+  },
+  "LazySection2": {
+    "description": "Auto imported from components/section2.vue"
+  },
+  "Section3": {
+    "description": "Auto imported from components/section3.vue"
+  },
+  "LazySection3": {
+    "description": "Auto imported from components/section3.vue"
+  },
+  "Section4": {
+    "description": "Auto imported from components/section4.vue"
+  },
+  "LazySection4": {
+    "description": "Auto imported from components/section4.vue"
+  },
+  "Basic": {
+    "description": "Auto imported from components/hero/Basic.vue"
+  },
+  "LazyBasic": {
+    "description": "Auto imported from components/hero/Basic.vue"
+  },
+  "Carousel": {
+    "description": "Auto imported from components/hero/Carousel.vue"
+  },
+  "LazyCarousel": {
+    "description": "Auto imported from components/hero/Carousel.vue"
   }
 }
