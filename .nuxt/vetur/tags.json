@@ -1,10 +1,4 @@
 {
-  "AppBar": {
-    "description": "Auto imported from components/AppBar.vue"
-  },
-  "LazyAppBar": {
-    "description": "Auto imported from components/AppBar.vue"
-  },
   "Section1": {
     "description": "Auto imported from components/section1.vue"
   },

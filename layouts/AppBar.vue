@@ -6,7 +6,7 @@
       :app="app"
       :style="bgColor"
     >
-      <v-container style="background-color:;height:90px">
+      <v-container style="height:80px;">
         <v-row no-gutters align="center" justify="space-between">
           <v-col md="auto">
             <v-img
@@ -40,14 +40,31 @@
               <v-tab to="#section4">Menu 4</v-tab>
             </v-tabs>
           </v-col>
-          <v-app-bar-nav-icon
-            class="hidden-md-and-up"
-            :style="navColor"
-            @click="drawer = !drawer"
-          />
+          <v-col md="auto" class="hidden-md-and-up" style="text-align:right;">
+            <v-app-bar-nav-icon
+              style=""
+              :style="navColor"
+              @click="drawer = !drawer"
+            />
+          </v-col>
         </v-row>
       </v-container>
     </v-app-bar>
+    <v-navigation-drawer
+      v-model="drawer"
+      right
+      fixed
+      temporary
+      overlay-color="primary"
+    >
+      <v-list color="white" shaped v-for="item in items" :key="item.title">
+        <v-list-item :to="item.to" color="primary">
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </div>
 </template>
 
@@ -55,13 +72,20 @@
 export default {
   data () {
     return {
+      drawer: false,
       show: true,
       absolute: true,
       app: false,
       clipped: false,
       color: 'transparent',
       nav_color: 'white',
-      dark: true
+      dark: true,
+      items: [
+        { title: 'Home', icon: 'mdi-view-dashboard', to : '#home' },
+        { title: 'Section 1', icon: 'mdi-view-dashboard', to : '#section1' },
+        { title: 'Section 2', icon: 'mdi-view-dashboard', to : '#section2' },
+        { title: 'Section 3', icon: 'mdi-view-dashboard', to : '#section3' }
+      ],
     }
   },
   computed: {
@@ -107,8 +131,9 @@ export default {
 
 <style lang="scss" scoped>
   .logo {
-    // margin-top: 10px;
-    // margin-left: 10px;
     cursor: pointer;
+  }
+  .v-slide-group__content {
+    transition: none;
   }
 </style>

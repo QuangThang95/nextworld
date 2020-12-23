@@ -1,17 +1,27 @@
 <template>
-  <div :style="bgColor">
-    <v-sheet :height="height" color="green">
+  <v-layout>
+    <v-img
+      cover
+      gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+      src="/hero/2.jpg"
+      :height="bgColor">
       <v-row
-        class="fill-height"
         align="center"
-        justify="center"
+        class="fill-height"
       >
-        <div class="display-3">
-          HOME
-        </div>
+        <v-col>
+          <v-container>
+            <div class="white--text font-weight-regular" :class="{'display-2': $vuetify.breakpoint. smAndDown, 'display-4': $vuetify.breakpoint. mdAndUp}">
+              Pertanian Indonesia
+            </div>
+            <div class="white--text font-weight-regular" :class="{'display-1': $vuetify.breakpoint. smAndDown, 'display-1': $vuetify.breakpoint. mdAndUp}">
+              Modern dan Berkualitas
+            </div>
+          </v-container>
+        </v-col>
       </v-row>
-    </v-sheet>
-  </div>
+    </v-img>
+  </v-layout>
 </template>
 
 <script>
@@ -23,7 +33,7 @@
     },
     computed: {
       bgColor () {
-        return 'height:' + this.$store.state.height + 'px;background-color:green;'
+        return this.$store.state.height
       }
     },
     mounted() {

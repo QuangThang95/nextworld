@@ -9,7 +9,7 @@
 
 
 <script>
-import Apps from '~/components/AppBar.vue'
+import Apps from '~/layouts/AppBar.vue'
 
 export default {
   components: {
