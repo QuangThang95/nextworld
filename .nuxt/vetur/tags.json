@@ -34,5 +34,11 @@
   },
   "LazyCarousel": {
     "description": "Auto imported from components/hero/Carousel.vue"
+  },
+  "Video": {
+    "description": "Auto imported from components/hero/Video.vue"
+  },
+  "LazyVideo": {
+    "description": "Auto imported from components/hero/Video.vue"
   }
 }

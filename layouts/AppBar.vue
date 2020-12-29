@@ -136,4 +136,10 @@ export default {
   .v-slide-group__content {
     transition: none;
   }
+  .v-item-group {
+    flex: 0 1 auto;
+    position: relative;
+    max-width: 100%;
+    transition: 0.1s cubic-bezier(0.25, 0.8, 0.5, 1);
+}
 </style>
