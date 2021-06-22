@@ -13,12 +13,13 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_10bd160a from 'nuxt_plugin_plugin_10bd160a' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_plugin_9e620bb8 from 'nuxt_plugin_plugin_9e620bb8' // Source: ./vuetify/plugin.js (mode: 'all')
-import nuxt_plugin_workbox_7c496d3c from 'nuxt_plugin_workbox_7c496d3c' // Source: ./workbox.js (mode: 'client')
-import nuxt_plugin_metaplugin_70208f62 from 'nuxt_plugin_metaplugin_70208f62' // Source: ./pwa/meta.plugin.js (mode: 'all')
-import nuxt_plugin_iconplugin_66d1447a from 'nuxt_plugin_iconplugin_66d1447a' // Source: ./pwa/icon.plugin.js (mode: 'all')
-import nuxt_plugin_axios_3e988020 from 'nuxt_plugin_axios_3e988020' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_plugin_27d96884 from 'nuxt_plugin_plugin_27d96884' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_plugin_da507e20 from 'nuxt_plugin_plugin_da507e20' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_workbox_4ebd1820 from 'nuxt_plugin_workbox_4ebd1820' // Source: ./workbox.js (mode: 'client')
+import nuxt_plugin_metaplugin_26ffcb03 from 'nuxt_plugin_metaplugin_26ffcb03' // Source: ./pwa/meta.plugin.js (mode: 'all')
+import nuxt_plugin_iconplugin_2ba77077 from 'nuxt_plugin_iconplugin_2ba77077' // Source: ./pwa/icon.plugin.js (mode: 'all')
+import nuxt_plugin_axios_66eaa3d4 from 'nuxt_plugin_axios_66eaa3d4' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_vuevideobackground_1fbfde08 from 'nuxt_plugin_vuevideobackground_1fbfde08' // Source: ../plugins/vue-video-background.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -47,7 +48,11 @@ Vue.component(Nuxt.name, Nuxt)
 
 Object.defineProperty(Vue.prototype, '$nuxt', {
   get() {
-    return this.$root.$options.$nuxt
+    const globalNuxt = this.$root.$options.$nuxt
+    if (process.client && !globalNuxt && typeof window !== 'undefined') {
+      return window.$nuxt
+    }
+    return globalNuxt
   },
   configurable: true
 })
@@ -57,14 +62,18 @@ Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n
 const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 const originalRegisterModule = Vuex.Store.prototype.registerModule
-const baseStoreOptions = { preserveState: process.client }
 
 function registerModule (path, rawModule, options = {}) {
-  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions, ...options })
+  const preserveState = process.client && (
+    Array.isArray(path)
+      ? !!path.reduce((namespacedState, path) => namespacedState && namespacedState[path], this.state)
+      : path in this.state
+  )
+  return originalRegisterModule.call(this, path, rawModule, { preserveState, ...options })
 }
 
 async function createApp(ssrContext, config = {}) {
-  const router = await createRouter(ssrContext)
+  const router = await createRouter(ssrContext, config)
 
   const store = createStore(ssrContext)
   // Add this.$router into store actions/mutations
@@ -204,28 +213,32 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_10bd160a === 'function') {
-    await nuxt_plugin_plugin_10bd160a(app.context, inject)
+  if (typeof nuxt_plugin_plugin_27d96884 === 'function') {
+    await nuxt_plugin_plugin_27d96884(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_9e620bb8 === 'function') {
-    await nuxt_plugin_plugin_9e620bb8(app.context, inject)
+  if (typeof nuxt_plugin_plugin_da507e20 === 'function') {
+    await nuxt_plugin_plugin_da507e20(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_workbox_7c496d3c === 'function') {
-    await nuxt_plugin_workbox_7c496d3c(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_4ebd1820 === 'function') {
+    await nuxt_plugin_workbox_4ebd1820(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_metaplugin_70208f62 === 'function') {
-    await nuxt_plugin_metaplugin_70208f62(app.context, inject)
+  if (typeof nuxt_plugin_metaplugin_26ffcb03 === 'function') {
+    await nuxt_plugin_metaplugin_26ffcb03(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_iconplugin_66d1447a === 'function') {
-    await nuxt_plugin_iconplugin_66d1447a(app.context, inject)
+  if (typeof nuxt_plugin_iconplugin_2ba77077 === 'function') {
+    await nuxt_plugin_iconplugin_2ba77077(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_3e988020 === 'function') {
-    await nuxt_plugin_axios_3e988020(app.context, inject)
+  if (typeof nuxt_plugin_axios_66eaa3d4 === 'function') {
+    await nuxt_plugin_axios_66eaa3d4(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_vuevideobackground_1fbfde08 === 'function') {
+    await nuxt_plugin_vuevideobackground_1fbfde08(app.context, inject)
   }
 
   // Lock enablePreview in context
@@ -235,26 +248,31 @@ async function createApp(ssrContext, config = {}) {
     }
   }
 
-  // If server-side, wait for async component to be resolved first
-  if (process.server && ssrContext && ssrContext.url) {
-    await new Promise((resolve, reject) => {
-      router.push(ssrContext.url, resolve, (err) => {
-        // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
-        if (!err._isRouter) return reject(err)
-        if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
+  // Wait for async component to be resolved first
+  await new Promise((resolve, reject) => {
+    const { route } = router.resolve(app.context.route.fullPath)
+    // Ignore 404s rather than blindly replacing URL
+    if (!route.matched.length && process.client) {
+      return resolve()
+    }
+    router.replace(route, resolve, (err) => {
+      // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
+      if (!err._isRouter) return reject(err)
+      if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
 
-        // navigated to a different route in router guard
-        const unregister = router.afterEach(async (to, from) => {
+      // navigated to a different route in router guard
+      const unregister = router.afterEach(async (to, from) => {
+        if (process.server && ssrContext && ssrContext.url) {
           ssrContext.url = to.fullPath
-          app.context.route = await getRouteData(to)
-          app.context.params = to.params || {}
-          app.context.query = to.query || {}
-          unregister()
-          resolve()
-        })
+        }
+        app.context.route = await getRouteData(to)
+        app.context.params = to.params || {}
+        app.context.query = to.query || {}
+        unregister()
+        resolve()
       })
     })
-  }
+  })
 
   return {
     store,

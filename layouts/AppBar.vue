@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-app-bar
-      :absolute="absolute"
-      flat
-      :app="app"
-      :style="bgColor"
-    >
+    <v-app-bar :absolute="absolute" flat :app="app" :style="bgColor">
       <v-container style="height:80px;">
         <v-row no-gutters align="center" justify="space-between">
           <v-col md="auto">
@@ -14,30 +9,27 @@
               contain
               class="logo"
               alt="3D Mention Logo"
-              src="/logo_white.png"
+              src="/logo-icon.png"
               position="left"
-              max-height="80"
+              max-height="50"
             />
             <v-img
               v-else
               contain
               class="logo"
               alt="3D Mention Logo"
-              src="/logo_color.png"
+              src="/logo-icon.png"
               position="left"
-              max-height="80"
+              max-height="50"
             />
           </v-col>
           <v-col md="auto" class="hidden-sm-and-down">
-            <v-tabs
-              :background-color="color"
-              :dark="dark"
-              >
+            <v-tabs :background-color="color" :dark="dark">
               <v-tab to="#home">Home</v-tab>
-              <v-tab to="#section1">Menu 1</v-tab>
-              <v-tab to="#section2">Menu 2</v-tab>
-              <v-tab to="#section3">Menu 3</v-tab>
-              <v-tab to="#section4">Menu 4</v-tab>
+              <v-tab to="#section1">Giới Thiệu & Quyền Lợi</v-tab>
+              <v-tab to="#section2">Hướng Dẫn </v-tab>
+              <v-tab to="#section3">Luật</v-tab>
+              <v-tab to="#section4">Minh Hoạ</v-tab>
             </v-tabs>
           </v-col>
           <v-col md="auto" class="hidden-md-and-up" style="text-align:right;">
@@ -70,76 +62,81 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       drawer: false,
       show: true,
       absolute: true,
       app: false,
       clipped: false,
-      color: 'transparent',
-      nav_color: 'white',
+      color: "transparent",
+      nav_color: "white",
       dark: true,
       items: [
-        { title: 'Home', icon: 'mdi-view-dashboard', to : '#home' },
-        { title: 'Section 1', icon: 'mdi-view-dashboard', to : '#section1' },
-        { title: 'Section 2', icon: 'mdi-view-dashboard', to : '#section2' },
-        { title: 'Section 3', icon: 'mdi-view-dashboard', to : '#section3' }
+        { title: "Home", icon: "mdi-view-dashboard", to: "#home" },
+        {
+          title: "Giới Thiệu & Quyền Lợi",
+          icon: "mdi-view-dashboard",
+          to: "#section1",
+        },
+        { title: "Hướng Dẫn", icon: "mdi-view-dashboard", to: "#section2" },
+        { title: "Luật chơi", icon: "mdi-view-dashboard", to: "#section3" },
+        { title: "Minh Hoạ", icon: "mdi-view-dashboard", to: "#section4" },
       ],
-    }
+    };
   },
   computed: {
-    bgColor () {
-      return 'height:80px;background-color:' + this.color
+    bgColor() {
+      return "height:80px;background-color:" + this.color;
     },
-    navColor () {
-      return 'color:' + this.nav_color
+    navColor() {
+      return "color:" + this.nav_color;
+    },
+  },
+  created() {
+    if (process.client) {
+      this.$store.commit("setHeight", window.innerHeight);
+      window.addEventListener("scroll", this.handleScroll);
     }
   },
-  created () {
+  destroyed() {
     if (process.client) {
-      this.$store.commit('setHeight', window.innerHeight)
-      window.addEventListener('scroll', this.handleScroll)
-    }
-  },
-  destroyed () {
-    if (process.client) {
-      window.removeEventListener('scroll', this.handleScroll)
+      window.removeEventListener("scroll", this.handleScroll);
     }
   },
   methods: {
-    handleScroll () {
-      if(window.scrollY > 120) {
-        this.dark = false
-        this.show = false
-        this.color = 'white'
-        this.nav_color = 'black'
-        this.app = true
-        this.absolute = false
+    handleScroll() {
+      if (window.scrollY > 120) {
+        this.dark = false;
+        this.show = false;
+        this.color = "white";
+        this.nav_color = "black";
+        this.app = true;
+        this.absolute = false;
       } else {
-        this.dark = true
-        this.show = true
-        this.color = 'transparent'
-        this.nav_color = 'white'
-        this.app = false
-        this.absolute = true
+        this.dark = true;
+        this.show = true;
+        this.color = "transparent";
+        this.nav_color = "white";
+        this.app = false;
+        this.absolute = true;
       }
-    }
+    },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .logo {
-    cursor: pointer;
-  }
-  .v-slide-group__content {
-    transition: none;
-  }
-  .v-item-group {
-    flex: 0 1 auto;
-    position: relative;
-    max-width: 100%;
-    transition: 0.1s cubic-bezier(0.25, 0.8, 0.5, 1);
+.logo {
+  cursor: pointer;
+}
+.v-slide-group__content {
+  transition: none;
+}
+.v-item-group {
+  flex: 0 1 auto;
+  position: relative;
+  max-width: 100%;
+  transition: 0.1s cubic-bezier(0.25, 0.8, 0.5, 1);
 }
 </style>
