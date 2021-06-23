@@ -87,19 +87,21 @@
             Kích hoạt rồi sẽ hiển thị là <strong>Đại Lí</strong> và Bắt đầu được
             làm nhiệm vụ <br /><strong>Lưu Ý</strong> : Bạn phải chuyển khoản
             đúng nội dung không hệ Thống sẽ k kích hoạt tk của bạn <br />
+            STK : <strong>275704070001258</strong> <br />
             Message :
-            <strong>tencuaban đk nv ctv quangthang1995</strong>
+            <strong>tentkcuaban> dk nv ctv quangthang1995</strong>
             <br />
             <v-text-field
               v-bind:value="input"
               @input="edit"
               label="nhập tên tk và ấn copy"
+              outlined
             ></v-text-field>
             <v-btn outlined color="primary" @click="copyTestingCode()"
               >copy</v-btn
             ><br />
             Tên tk bạn là {{ input }}, message sẽ là: <br />
-            <strong>{{ input }} đk nv ctv quangthang1995</strong>
+            <strong>{{ textCopy }}</strong>
             <input type="hidden" id="testing-code" :value="textCopy" />
           </div>
         </v-col>
@@ -131,7 +133,7 @@ export default {
   },
   computed: {
     textCopy() {
-      return this.input + " đk nv ctv quangthang1995";
+      return this.input + " dk nv ctv quangthang1995";
     },
   },
   methods: {
