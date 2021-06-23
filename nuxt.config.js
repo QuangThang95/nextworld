@@ -9,8 +9,8 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: "%s - vuetify-landing-page",
-    title: "vuetify-landing-page",
+    titleTemplate: "Kiếm Tiền Youtube",
+    title: "Kiếm Tiền Online",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -58,8 +58,12 @@ export default {
     // https://go.nuxtjs.dev/eslint
     // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
+    "@nuxtjs/google-analytics",
     "@nuxtjs/vuetify",
   ],
+  googleAnalytics: {
+    id: "G-XQXVDHPVDK",
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [

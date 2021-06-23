@@ -126,7 +126,9 @@ export default {
       input: "",
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(this.$ga.page("/"));
+  },
   computed: {
     textCopy() {
       return this.input + " đk nv ctv quangthang1995";
