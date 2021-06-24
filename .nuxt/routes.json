@@ -3,7 +3,6 @@
     "name": "index",
     "path": "/",
     "component": "/Users/quangthang/Desktop/thang/vuetify-landing-page-nuxtjs/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_7088668a"
+    "chunkName": "pages/index"
   }
 ]
